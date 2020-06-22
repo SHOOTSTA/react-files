@@ -94,14 +94,20 @@ class Files extends React.Component {
     this.onDragEnter()
   }
 
-  onDragEnter () {
+  onDragEnter (event) {
     const { className, dropActiveClassName } = this.props
+
+    event.preventDefault()
+    event.stopPropagation()
 
     this.dropzone.className = cx(className, dropActiveClassName)
   }
 
-  onDragLeave () {
+  onDragLeave (event) {
     const { className } = this.props
+
+    event.preventDefault()
+    event.stopPropagation()
 
     this.dropzone.className = cx(className)
   }

@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import cx from 'classnames'
 
-const mimeTypeRegexp = /^(application|audio|example|image|message|model|multipart|text|video)\/[a-z0-9\.\+\*-]+$/;
-const extRegexp = /\.[a-zA-Z0-9]*$/;
+const mimeTypeRegexp = /^(application|audio|example|image|message|model|multipart|text|video)\/[a-z0-9\.\+\*-]+$/
+const extRegexp = /\.[a-zA-Z0-9]*$/
 
 class Files extends React.Component {
   constructor (props, context) {
@@ -85,14 +86,16 @@ class Files extends React.Component {
     event.stopPropagation()
   }
 
-  onDragEnter (event) {
-    let el = this.dropzone
-    el.className += ' ' + this.props.dropActiveClassName
+  onDragEnter () {
+    const { className, dropActiveClassName } = this.props
+
+    this.dropzone.className = cx(className, dropActiveClassName)
   }
 
-  onDragLeave (event) {
-    let el = this.dropzone
-    this.dropzone.className = el.className.replace(' ' + this.props.dropActiveClassName, '')
+  onDragLeave () {
+    const { className } = this.props
+
+    this.dropzone.className = cx(className)
   }
 
   openFileChooser () {
@@ -101,7 +104,7 @@ class Files extends React.Component {
   }
 
   fileTypeAcceptable (file) {
-    let accepts = this.props.accepts;
+    let accepts = this.props.accepts
     if (!accepts) {
       return true
     }
@@ -121,11 +124,11 @@ class Files extends React.Component {
           }
         }
       } else if (file.extension && accept.match(extRegexp)) {
-        const ext = accept.substr(1);
-        return file.extension.toLowerCase() === ext.toLowerCase();
+        const ext = accept.substr(1)
+        return file.extension.toLowerCase() === ext.toLowerCase()
       }
       return false
-    });
+    })
 
     if (!result) {
       this.onError({

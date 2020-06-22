@@ -82,8 +82,15 @@ class Files extends React.Component {
   }
 
   onDragOver (event) {
+    const { className } = this.props
+
     event.preventDefault()
     event.stopPropagation()
+
+    // Handles the case where child took focus
+    if (this.dropzone.className !== className) { return }
+
+    this.onDragEnter()
   }
 
   onDragEnter () {

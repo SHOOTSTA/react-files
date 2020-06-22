@@ -10,6 +10,7 @@ class Files extends React.Component {
     super(props, context)
     this.onDrop = this.onDrop.bind(this)
     this.onDragEnter = this.onDragEnter.bind(this)
+    this.onDragOver = this.onDragEnter.bind(this)
     this.onDragLeave = this.onDragLeave.bind(this)
     this.openFileChooser = this.openFileChooser.bind(this)
 
